@@ -1,0 +1,12 @@
+@TransactIngest_HostAddress = https://localhost:7089
+
+POST {{TransactIngest_HostAddress}}/api/import
+Accept: application/json
+
+###
+
+GET {{TransactIngest_HostAddress}}/api/transactions
+Accept: application/json
+
+
+###

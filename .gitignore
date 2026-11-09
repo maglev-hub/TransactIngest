@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+TestResults/
+
+# Angular dependencies and build output
+node_modules/
+**/.angular/cache/
+dist/
+
+# Local SQLite databases
+*.db
+*.db-shm
+*.db-wal
+*.db-journal

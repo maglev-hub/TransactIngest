@@ -1,0 +1,143 @@
+<h2>Transaction List</h2>
+
+<button type="button"
+        class="button button-primary"
+        (click)="importTransactions()"
+        [disabled]="isImporting()">
+
+  @if (isImporting()) {
+  Importing...
+  } @else {
+  Import Transactions
+  }
+</button>
+
+<button type="button"
+        class="button button-secondary"
+        (click)="loadTransactions()"
+        [disabled]="isLoading()">
+
+  @if (isLoading()) {
+  Refreshing...
+  } @else {
+  Refresh Transactions
+  }
+</button>
+
+@if (errorMessage()) {
+<p class="error-message">
+  {{ errorMessage() }}
+</p>
+}
+
+@if (importResult()) {
+<div class="import-summary">
+  <h3>Import Summary</h3>
+
+  <p>Successful Sources: {{ importResult()?.successfulSources }}</p>
+  <p>Failed Sources: {{ importResult()?.failedSources }}</p>
+  <p>New Transactions: {{ importResult()?.newTransactions }}</p>
+  <p>Updated Transactions: {{ importResult()?.updatedTransactions }}</p>
+  <p>Revoked Transactions: {{ importResult()?.revokedTransactions }}</p>
+  <p>Finalized Transactions: {{ importResult()?.finalizedTransactions }}</p>
+</div>
+}
+
+<p>Number of transactions: {{ transactions().length }}</p>
+
+
+@if (isLoading()) {
+<p>Loading transactions...</p>
+}
+
+@if (loadError()) {
+<p class="error-message">
+  {{ loadError() }}
+</p>
+}
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>
+        <button type="button"
+                class="sort-button"
+                (click)="sortBy('sourceSystem')">
+          Source System
+          <span>{{ sortIndicator('sourceSystem') }}</span>
+        </button>
+      </th>
+
+      <th>
+        <button type="button"
+                class="sort-button"
+                (click)="sortBy('transactionId')">
+          Transaction ID
+          <span>{{ sortIndicator('transactionId') }}</span>
+        </button>
+      </th>
+
+      <th>
+        <button type="button"
+                class="sort-button"
+                (click)="sortBy('locationCode')">
+          Location
+          <span>{{ sortIndicator('locationCode') }}</span>
+        </button>
+      </th>
+
+      <th>
+        <button type="button"
+                class="sort-button"
+                (click)="sortBy('productName')">
+          Product
+          <span>{{ sortIndicator('productName') }}</span>
+        </button>
+      </th>
+
+      <th>
+        <button type="button"
+                class="sort-button"
+                (click)="sortBy('amount')">
+          Amount
+          <span>{{ sortIndicator('amount') }}</span>
+        </button>
+      </th>
+
+      <th>
+        <button type="button"
+                class="sort-button"
+                (click)="sortBy('transactionTime')">
+          Transaction Time
+          <span>{{ sortIndicator('transactionTime') }}</span>
+        </button>
+      </th>
+
+      <th>
+        <button type="button"
+                class="sort-button"
+                (click)="sortBy('status')">
+          Status
+          <span>{{ sortIndicator('status') }}</span>
+        </button>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (
+    transaction of sortedTransactions();
+    track transaction.sourceSystem + '-' + transaction.transactionId
+    ) {
+    <tr>
+      <td>{{ transaction.sourceSystem }}</td>
+      <td>{{ transaction.transactionId }}</td>
+      <td>{{ transaction.locationCode }}</td>
+      <td>{{ transaction.productName }}</td>
+      <td>{{ transaction.amount | currency }}</td>
+      <td>{{ transaction.transactionTime }}</td>
+      <td>{{ transaction.status }}</td>
+    </tr>
+    }
+  </tbody>
+</table>

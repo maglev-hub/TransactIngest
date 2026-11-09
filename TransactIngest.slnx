@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="TransactIngest.Application/TransactIngest.Application.csproj" Id="94ce0779-5397-4675-ad29-cd7529da2b39" />
+  <Project Path="TransactIngest.Domain/TransactIngest.Domain.csproj" />
+  <Project Path="TransactIngest.Infrastructure/TransactIngest.Infrastructure.csproj" Id="72f662fb-6c3a-480b-81e6-e79f6a63a683" />
+  <Project Path="TransactIngest.Tests/TransactIngest.Tests.csproj" Id="f96a6abb-7fac-4efb-9e10-e720b354e3fb" />
+  <Project Path="TransactIngest/TransactIngest.csproj" />
+</Solution>
